@@ -70,10 +70,10 @@ MonoBehaviour:
   lerpValueVelocity: 0.014
   maxSpeedLerpValue: 0.4
   minSpeed: 100
-  maxSpeed: 1500
+  maxSpeed: 600
   pitchControl: 1
   yawnControl: 1
-  rollControl: 1
+  rollControl: 1.5
 --- !u!54 &7931036886020955358
 Rigidbody:
   m_ObjectHideFlags: 0
