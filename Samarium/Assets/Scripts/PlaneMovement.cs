@@ -42,6 +42,7 @@ namespace DefaultNamespace
         public void RollInput(float inputVal)
         {
             var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
+            //transform.RotateAround(transform.position, transform.forward, inputVal * 2);
             AddTorqueToThePlane(transform.forward, inputVal * appliedControl);
         }
 
@@ -73,6 +74,8 @@ namespace DefaultNamespace
             if (Math.Abs(inputVal) > FLOAT_TOLERANCE) {
                 var tiltVector = Vector3.Lerp(Vector3.zero, direction * (inputVal * stats.airControl), 0.1f);
                 rbd.AddTorque(tiltVector);
+                //Quaternion target = Quaternion.Euler(direction * inputVal * 90);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 5f);
             }
         }
 
