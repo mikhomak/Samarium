@@ -8,6 +8,7 @@ public class Plane : MonoBehaviour
     [SerializeField] private Rigidbody rbd;
     [SerializeField] private Stats stats;
     [SerializeField] private InputMaster inputMaster;
+    [SerializeField] private LevelManager levelManager;
 
     private PlaneMovement planeMovement;
 
@@ -48,5 +49,10 @@ public class Plane : MonoBehaviour
         planeMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
         planeMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
         planeMovement.Movement();
+    }
+
+    public void AddScore(int addedScore)
+    {
+        levelManager.AddScore(addedScore);
     }
 }

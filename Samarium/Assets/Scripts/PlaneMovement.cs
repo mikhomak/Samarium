@@ -93,6 +93,9 @@ namespace DefaultNamespace
             float dotProduct = Vector3.Dot(upVector, velocity);
             if (dotProduct < 0) {
                 rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
+                if (dotProduct < -0.4) {
+                    plane.AddScore(1);
+                }
             }
         }
     }
