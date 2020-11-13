@@ -35,7 +35,7 @@ namespace DefaultNamespace
 
         public void PitchInput(float inputVal)
         {
-            var appliedControl = !thrustUp ? stats.pitchControlThrustDown: stats.pitchControl;
+            var appliedControl = !thrustUp ? stats.pitchControlThrustDown : stats.pitchControl;
             AddTorqueToThePlane(transform.right, inputVal * appliedControl);
         }
 
