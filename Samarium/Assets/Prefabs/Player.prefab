@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 883646428202532396}
   - component: {fileID: 2207920169131711506}
-  - component: {fileID: 888120592144453497}
+  - component: {fileID: 7092310111556614125}
   - component: {fileID: 7931036886020955358}
   m_Layer: 0
   m_Name: Player
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbd: {fileID: 7931036886020955358}
-  stats: {fileID: 888120592144453497}
---- !u!114 &888120592144453497
+  stats: {fileID: 7092310111556614125}
+--- !u!114 &7092310111556614125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,16 +60,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b85e8c72e25784ea539e540c92c352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationThrottleDown: 200
-  accelerationNoThrottle: 200
-  accelerationThrottleUp: 200
+  maxAcceleration: 10
+  minAcceleration: -10
+  accelerationThrottleDown: 2
+  accelerationNoThrottle: 1
+  accelerationThrottleUp: 3
   airControl: 40
   aerodynamic: 200
-  lerpValueVelocity: 200
+  lerpValueVelocity: 0.014
+  maxSpeedLerpValue: 0.4
+  minSpeed: 100
+  maxSpeed: 1500
   pitchControl: 1
   yawnControl: 1
   rollControl: 1
-  maxSpeed: 1
 --- !u!54 &7931036886020955358
 Rigidbody:
   m_ObjectHideFlags: 0

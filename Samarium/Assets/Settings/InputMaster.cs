@@ -41,6 +41,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Thrust"",
+                    ""type"": ""Button"",
+                    ""id"": ""dfb87ed4-0566-4e52-a789-1110c4692fa0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -124,7 +132,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""76a0f0c4-3135-426a-bac5-2317185918de"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -135,11 +143,44 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""f3eadb64-eddb-4a9e-8f3a-e7a7bed41e8f"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Yawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f08e1738-3c3d-41fe-b1b2-4bf36251bf89"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5b80bb97-c9d2-4b4a-b49e-a3bac3151ced"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1ba7de6f-93cf-43c4-887d-dd96d0dc091b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Thrust"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -192,6 +233,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Pitch = m_Player.FindAction("Pitch", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Yawn = m_Player.FindAction("Yawn", throwIfNotFound: true);
+        m_Player_Thrust = m_Player.FindAction("Thrust", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -247,6 +289,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Pitch;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Yawn;
+    private readonly InputAction m_Player_Thrust;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -254,6 +297,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Pitch => m_Wrapper.m_Player_Pitch;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Yawn => m_Wrapper.m_Player_Yawn;
+        public InputAction @Thrust => m_Wrapper.m_Player_Thrust;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +316,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Yawn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYawn;
                 @Yawn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYawn;
                 @Yawn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYawn;
+                @Thrust.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrust;
+                @Thrust.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrust;
+                @Thrust.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrust;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -285,6 +332,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Yawn.started += instance.OnYawn;
                 @Yawn.performed += instance.OnYawn;
                 @Yawn.canceled += instance.OnYawn;
+                @Thrust.started += instance.OnThrust;
+                @Thrust.performed += instance.OnThrust;
+                @Thrust.canceled += instance.OnThrust;
             }
         }
     }
@@ -336,6 +386,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnPitch(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnYawn(InputAction.CallbackContext context);
+        void OnThrust(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

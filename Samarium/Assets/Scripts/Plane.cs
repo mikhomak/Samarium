@@ -46,6 +46,7 @@ public class Plane : MonoBehaviour
         planeMovement.PitchInput(inputMaster.Player.Pitch.ReadValue<float>());
         planeMovement.RollInput(inputMaster.Player.Roll.ReadValue<float>());
         planeMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
+        planeMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
         planeMovement.Movement();
     }
 }
