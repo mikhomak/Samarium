@@ -29,6 +29,7 @@ namespace DefaultNamespace
             rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
             Thrusting();
             CalculateAerodynamics();
+            //Debug.Log(currentThrust);
         }
 
         public void PitchInput(float inputVal)
@@ -51,11 +52,11 @@ namespace DefaultNamespace
             if (inputVal < 0) {
                 currentThrust -= stats.accelerationThrottleDown;
             }
-            else if (inputVal == 0) {
-                currentThrust -= stats.accelerationNoThrottle;
-            }
             else if (inputVal > 0) {
                 currentThrust += stats.accelerationThrottleUp;
+            }
+            else {
+                currentThrust -= stats.accelerationNoThrottle;
             }
 
             currentThrust = Mathf.Clamp(currentThrust, stats.minAcceleration, stats.maxAcceleration);
@@ -85,7 +86,7 @@ namespace DefaultNamespace
             var upVector = transform.up;
             float dotProduct = Vector3.Dot(upVector, velocity);
             if (dotProduct < 0) {
-                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic), ForceMode.VelocityChange);
+                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
             }
         }
     }

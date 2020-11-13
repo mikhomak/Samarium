@@ -44,9 +44,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Thrust"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""dfb87ed4-0566-4e52-a789-1110c4692fa0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
