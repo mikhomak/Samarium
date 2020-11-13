@@ -91,7 +91,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""0018d654-e37a-4c5b-9028-efbeb0045e04"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -102,7 +102,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""017fdd7f-133d-4ed6-8726-57d53129dfa8"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -124,7 +124,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""76a0f0c4-3135-426a-bac5-2317185918de"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -135,7 +135,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""f3eadb64-eddb-4a9e-8f3a-e7a7bed41e8f"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",

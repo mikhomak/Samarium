@@ -24,7 +24,7 @@ namespace DefaultNamespace
         public void Movement()
         {
             // Adding torque to compensate torque of pitch/roll/yawn
-            rbd.AddRelativeTorque(rbd.angularVelocity * -1f / 0.5f);
+            rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
         }
 
         public void PitchInput(float inputVal)

@@ -9,13 +9,13 @@ public class Stats : MonoBehaviour
     [Header("Physics")] public float accelerationThrottleDown = 200f;
     public float accelerationNoThrottle = 200f;
     public float accelerationThrottleUp = 200f;
-    public float airControl = 200f;
+    public float airControl = 40f;
     public float aerodynamic = 200f;
     public float lerpValueVelocity = 200f;
 
-    [Header("Input Controls")] public float pitchControl = 200f;
-    public float yawnControl = 200f;
-    public float rollControl = 200f;
+    [Header("Input Controls")] public float pitchControl = 1f;
+    public float yawnControl = 1f;
+    public float rollControl = 1f;
 
     public float maxSpeed = 400f;
 }

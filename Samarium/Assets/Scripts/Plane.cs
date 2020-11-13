@@ -29,7 +29,6 @@ public class Plane : MonoBehaviour
     private void RegisterInputs()
     {
         inputMaster = new InputMaster();
-        inputMaster.Player.Pitch.performed += ctx => planeMovement.PitchInput(ctx.ReadValue<float>());
     }
 
     private void OnEnable()
@@ -44,7 +43,9 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
-//        planeMovement.RollInput(InputManager.GetRollInput());
-  //      planeMovement.YawnInput(InputManager.GetYawnInput());
+        planeMovement.PitchInput(inputMaster.Player.Pitch.ReadValue<float>());
+        planeMovement.RollInput(inputMaster.Player.Roll.ReadValue<float>());
+        planeMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
+        planeMovement.Movement();
     }
 }

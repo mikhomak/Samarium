@@ -63,13 +63,13 @@ MonoBehaviour:
   accelerationThrottleDown: 200
   accelerationNoThrottle: 200
   accelerationThrottleUp: 200
-  airControl: 200
+  airControl: 40
   aerodynamic: 200
   lerpValueVelocity: 200
-  pitchControl: 200
-  yawnControl: 200
-  rollControl: 200
-  maxSpeed: 400
+  pitchControl: 1
+  yawnControl: 1
+  rollControl: 1
+  maxSpeed: 1
 --- !u!54 &7931036886020955358
 Rigidbody:
   m_ObjectHideFlags: 0
