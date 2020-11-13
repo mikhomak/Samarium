@@ -14,6 +14,7 @@ namespace DefaultNamespace
         private const float FLOAT_TOLERANCE = 0.01f;
 
         private float currentThrust;
+        private bool thrustUp;
 
         public PlaneMovement(Plane plane, Rigidbody rbd, Stats stats, Transform transform)
         {
@@ -34,12 +35,14 @@ namespace DefaultNamespace
 
         public void PitchInput(float inputVal)
         {
-            AddTorqueToThePlane(transform.right, inputVal * stats.pitchControl);
+            var appliedControl = !thrustUp ? stats.pitchControlThrustDown: stats.pitchControl;
+            AddTorqueToThePlane(transform.right, inputVal * appliedControl);
         }
 
         public void RollInput(float inputVal)
         {
-            AddTorqueToThePlane(transform.forward, inputVal * stats.rollControl);
+            var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
+            AddTorqueToThePlane(transform.forward, inputVal * appliedControl);
         }
 
         public void YawnInput(float inputVal)
@@ -50,12 +53,15 @@ namespace DefaultNamespace
         public void ThrustInput(float inputVal)
         {
             if (inputVal < 0) {
+                thrustUp = false;
                 currentThrust -= stats.accelerationThrottleDown;
             }
             else if (inputVal > 0) {
+                thrustUp = true;
                 currentThrust += stats.accelerationThrottleUp;
             }
             else {
+                thrustUp = false;
                 currentThrust -= stats.accelerationNoThrottle;
             }
 
