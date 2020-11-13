@@ -28,6 +28,7 @@ namespace DefaultNamespace
             // Adding torque to compensate torque of pitch/roll/yawn
             rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
             Thrusting();
+            CalculateAerodynamics();
         }
 
         public void PitchInput(float inputVal)
@@ -50,11 +51,10 @@ namespace DefaultNamespace
             if (inputVal < 0) {
                 currentThrust -= stats.accelerationThrottleDown;
             }
-            else if (Math.Abs(inputVal) < FLOAT_TOLERANCE) {
+            else if (inputVal == 0) {
                 currentThrust -= stats.accelerationNoThrottle;
             }
-
-            if (inputVal > 0) {
+            else if (inputVal > 0) {
                 currentThrust += stats.accelerationThrottleUp;
             }
 
@@ -77,6 +77,16 @@ namespace DefaultNamespace
 
             Vector3 velocity = Vector3.Lerp(rbd.velocity, transform.forward * speed, stats.lerpValueVelocity);
             rbd.velocity = velocity;
+        }
+
+        private void CalculateAerodynamics()
+        {
+            var velocity = rbd.velocity.normalized;
+            var upVector = transform.up;
+            float dotProduct = Vector3.Dot(upVector, velocity);
+            if (dotProduct < 0) {
+                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic), ForceMode.VelocityChange);
+            }
         }
     }
 }
