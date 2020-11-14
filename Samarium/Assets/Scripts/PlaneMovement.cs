@@ -15,6 +15,7 @@ namespace DefaultNamespace
 
         private float currentThrust;
         private bool thrustUp;
+        private float dot;
 
         public PlaneMovement(Plane plane, Rigidbody rbd, Stats stats, Transform transform)
         {
@@ -73,8 +74,6 @@ namespace DefaultNamespace
             if (Math.Abs(inputVal) > FLOAT_TOLERANCE) {
                 //var tiltVector = Vector3.Lerp(Vector3.zero, direction * (inputVal * stats.airControl), 0.1f);
                 //rbd.AddTorque(tiltVector, ForceMode.VelocityChange);
-                //Quaternion target = Quaternion.Euler(direction * inputVal * 90);
-                //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 5f);
                 transform.Rotate(direction * (stats.rotationSpeed * inputVal * Time.deltaTime));
             }
         }
@@ -95,14 +94,30 @@ namespace DefaultNamespace
             var upVector = transform.up;
             float dotProduct = Vector3.Dot(upVector, velocity);
             //Debug.Log(Mathf.Cos(Vector3.Angle(upVector ,velocity)));
-            Debug.DrawLine(transform.position, transform.position + velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic), Color.red );
+            Debug.DrawLine(transform.position,
+                transform.position + velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic),
+                Color.red);
             Debug.Log(dotProduct);
-            if (Mathf.Abs(dotProduct) > 0.4) {
-                plane.AddScore(1);
-            }
             if (dotProduct < -0.4f) {
                 rbd.AddForce(velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic));
             }
+
+            HasDotChanged(dotProduct);
+        }
+
+        private void HasDotChanged(float newDot)
+        {
+            float absPreviousDot = Mathf.Abs(dot);
+            float absDot = Mathf.Abs(newDot);
+            if (absPreviousDot < 0.4f && absDot > 0.4f) {
+                plane.TrickManager.StopCurrentTrick();
+                plane.TrickManager.StartNewTrick(false, false);
+            }
+            else if (absPreviousDot > 0.4f && absDot < 0.4f && plane.TrickManager.Active) {
+                plane.TrickManager.StopCurrentTrick();
+            }
+
+            dot = newDot;
         }
     }
 }

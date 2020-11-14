@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2207920169131711506}
   - component: {fileID: 7092310111556614125}
   - component: {fileID: 7931036886020955358}
+  - component: {fileID: 9172369326751329415}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6494037081368042912}
+  - {fileID: 4554457664486612245}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbd: {fileID: 7931036886020955358}
   stats: {fileID: 7092310111556614125}
+  levelManager: {fileID: 0}
 --- !u!114 &7092310111556614125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,20 +63,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b85e8c72e25784ea539e540c92c352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 10
+  maxAcceleration: 90
   minAcceleration: -10
-  accelerationThrottleDown: 2
-  accelerationNoThrottle: 1
-  accelerationThrottleUp: 3
-  airControl: 40
-  aerodynamic: 200
+  accelerationThrottleDown: 50
+  accelerationNoThrottle: 2
+  accelerationThrottleUp: 60
+  rotationSpeed: 60
+  airControl: 1
+  aerodynamic: 50
   lerpValueVelocity: 0.014
   maxSpeedLerpValue: 0.4
-  minSpeed: 100
-  maxSpeed: 600
+  minSpeed: 1
+  maxSpeed: 100
   pitchControl: 1
+  pitchControlThrustDown: 1.6
   yawnControl: 1
   rollControl: 1.5
+  rollControlThrustUp: 3.5
 --- !u!54 &7931036886020955358
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82,14 +88,27 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3843201885198452883}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 2
+  m_Drag: 1
+  m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &9172369326751329415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843201885198452883}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.35, y: 0.29, z: 3.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4547838094597371078
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +120,6 @@ GameObject:
   - component: {fileID: 6494037081368042912}
   - component: {fileID: 5131391327825727517}
   - component: {fileID: 1409283510154960174}
-  - component: {fileID: 3976766232467878738}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -172,16 +190,47 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3976766232467878738
-BoxCollider:
+--- !u!1 &9222601011624760574
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4547838094597371078}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4554457664486612245}
+  - component: {fileID: 4189712113906191566}
+  m_Layer: 0
+  m_Name: CloseCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4554457664486612245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222601011624760574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 883646428202532396}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4189712113906191566
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222601011624760574}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 3.44
   m_Center: {x: 0, y: 0, z: 0}

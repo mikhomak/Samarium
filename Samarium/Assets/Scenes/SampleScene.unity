@@ -1082,6 +1082,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &526252834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 526252836}
+  - component: {fileID: 526252835}
+  m_Layer: 0
+  m_Name: TimerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &526252835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526252834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e80047d318ccac45966541ca3fd281d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &526252836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526252834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1344141, y: 28.386337, z: 1.1408178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &649175713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,14 +1537,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 888120592144453497, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: maxSpeed
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 888120592144453497, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: maxAcceleration
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 2207920169131711506, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: levelManager
       value: 
@@ -1509,74 +1544,6 @@ PrefabInstance:
     - target: {fileID: 3843201885198452883, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: maxSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: minSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: airControl
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: aerodynamic
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: rollControl
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: maxAcceleration
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: lerpValueVelocity
-      value: 0.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: rollControlThrustUp
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: accelerationNoThrottle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: accelerationThrottleUp
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: pitchControlThrustDown
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: accelerationThrottleDown
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: m_Mass
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: m_AngularDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
-      propertyPath: m_Constraints
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
@@ -2016,8 +1983,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90270585, b: 0, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2026,7 +1993,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40

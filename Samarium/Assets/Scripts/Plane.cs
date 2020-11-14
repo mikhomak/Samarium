@@ -10,7 +10,11 @@ public class Plane : MonoBehaviour
     [SerializeField] private InputMaster inputMaster;
     [SerializeField] private LevelManager levelManager;
 
+    [Header("Score")] private int closeMultiplier = 2;
+    private float highSpeedMultiplier = 1.5f;
+    
     private PlaneMovement planeMovement;
+    private TrickManager trickManager;
 
     private void Awake()
     {
@@ -18,12 +22,14 @@ public class Plane : MonoBehaviour
         RegisterInputs();
     }
 
+
+
     private void InitComponents()
     {
         if (rbd == null) {
             rbd = GetComponent<Rigidbody>();
         }
-
+        trickManager = new TrickManager(levelManager);
         planeMovement = new PlaneMovement(this, rbd, stats, transform);
     }
 
@@ -49,10 +55,14 @@ public class Plane : MonoBehaviour
         planeMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
         planeMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
         planeMovement.Movement();
+        trickManager.TickTrickManger();
     }
 
-    public void AddScore(int addedScore)
+
+    public TrickManager TrickManager
     {
-        levelManager.AddScore(addedScore);
+        get => trickManager;
+        set => trickManager = value;
     }
+
 }
