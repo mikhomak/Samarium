@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.Tricks;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -11,10 +12,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
 
-    public void UpdateCurrentTrick(string name, float currentScore)
+    public void UpdateCurrentTrick(float currentScore)
     {
-        currentTrickScoreText.text = name + " " + currentScore + "!";
-        currentTrickScore = currentScore;
+        currentTrickScore += currentScore;
+        currentTrickScoreText.text = currentTrickScore + "!";
     }
 
     public void UpdateDriftClose(bool close)
@@ -44,9 +45,11 @@ public class LevelManager : MonoBehaviour
         currentTrickScore = 0;
     }
 
-    public void AddSpecialMove()
+    public void AddSpecialMove(ISpecialTrick specialTrick)
     {
+        currentTrickScore *= specialTrick.GetSpecialTrickMultiplier();
         specialMoveGameObject.SetActive(true);
+        currentTrickScoreText.text = currentTrickScore + "!";
     }
 
     public void AddScore(float addedScore)

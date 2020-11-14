@@ -24,7 +24,7 @@ namespace DefaultNamespace.Tricks
                 CancelFinishTimer();
 
                 currentTrickScore += CalculateContinuousScore();
-                trickManager.UpdateContinuousUi(this);
+                trickManager.UpdateContinuousUi( CalculateContinuousScore());
             }
 
         }

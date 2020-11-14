@@ -10,6 +10,7 @@ namespace DefaultNamespace.Tricks
         private float initialRotation;
         private bool firstStage;
 
+
         public BarrelRoll(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
             planeMovement, trickManager)
         {
@@ -37,7 +38,7 @@ namespace DefaultNamespace.Tricks
                 firstStage = true;
             }
 
-            if (firstStage && FloatComparer.AreEqual(initialRotation, axisRotation, 0.2f)) {
+            if (firstStage && FloatComparer.AreEqual(initialRotation, axisRotation, 0.05f) ){
                 success = true;
                 FinishTrick();
                 return;

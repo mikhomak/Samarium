@@ -7,7 +7,7 @@
         protected PlaneMovement planeMovement;
         protected TrickManager trickManager;
 
-        protected float trickScoreMultiplier;
+        protected float trickScoreMultiplier = 2f;
         protected bool Active;
         protected float finishTimerTime = 30f;
 
@@ -32,7 +32,7 @@
         {
             Active = false;
             if (success) {
-                trickManager.AddSpecialMove();
+                trickManager.AddSpecialMove(this);
             }
             return true;
         }
@@ -74,6 +74,11 @@
         public void SetSuccess(bool success)
         {
             this.success = success;
+        }
+
+        public float GetSpecialTrickMultiplier()
+        {
+            return trickScoreMultiplier;
         }
     }
 }

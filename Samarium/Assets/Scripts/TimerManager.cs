@@ -89,9 +89,6 @@ public class TimerManager : MonoBehaviour
         public void updateTimer(float time)
         {
             endTime -= time;
-            if ((bool) action?.Target.ToString().Contains("Druft")) {
-                Debug.Log("asd");
-            }
             if (endTime < 0) {
                 action?.Invoke();
                 Debug.Log(action?.Target.ToString());

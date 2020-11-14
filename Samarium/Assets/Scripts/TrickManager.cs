@@ -24,9 +24,9 @@ namespace DefaultNamespace
             tricks.Add(BarrelRoll);
         }
 
-        public void UpdateContinuousUi(IContinuousTrick continuousTrick)
+        public void UpdateContinuousUi(float addedValue)
         {
-            levelManager.UpdateCurrentTrick(continuousTrick.ToString(), continuousTrick.GetCurrentScore());
+            levelManager.UpdateCurrentTrick(addedValue);
         }
 
         public void ReleaseContinuousUiText()
@@ -44,9 +44,9 @@ namespace DefaultNamespace
             });
         }
 
-        public void AddSpecialMove()
+        public void AddSpecialMove(ISpecialTrick specialTrick)
         {
-            levelManager.AddSpecialMove();
+            levelManager.AddSpecialMove(specialTrick);
         }
 
         public void SetClose(bool close)
