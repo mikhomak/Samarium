@@ -9,7 +9,7 @@
 
         protected float trickScoreMultiplier;
         protected bool Active;
-        protected float finishTimerTime = 3f;
+        protected float finishTimerTime = 30f;
 
         protected ASpecialTrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager)
         {

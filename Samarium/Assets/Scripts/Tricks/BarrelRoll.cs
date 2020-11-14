@@ -26,16 +26,15 @@ namespace DefaultNamespace.Tricks
             success = false;
             firstStage = false;
             Active = true;
+            FinishTrickWithTimer();
         }
 
 
         public override void UpdateTrick()
         {
-            FinishTrickWithTimer();
             axisRotation = plane.transform.rotation.z;
             if (Mathf.Abs(axisRotation) > 0.5 && !firstStage) {
                 firstStage = true;
-                Debug.Log("nice");
             }
 
             if (firstStage && FloatComparer.AreEqual(initialRotation, axisRotation, 0.2f)) {

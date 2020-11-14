@@ -5,23 +5,28 @@ namespace DefaultNamespace.Tricks
     public class DriftTrick : ATrick, IContinuousTrick
     {
 
-        public DriftTrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane, planeMovement, trickManager)
+        public DriftTrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
+            planeMovement, trickManager)
         {
         }
-        
+
         public override void UpdateTrick()
         {
+            bool drifting = planeMovement.IsDrifting();
 
-            if (!planeMovement.IsDrifting() && !stoppingSoon) {
+            if (!drifting && !stoppingSoon) {
+                Debug.Log("gonna stop");
                 FinishTrickWithTimer();
             }
-            else if(planeMovement.IsDrifting()) {
+            else if (drifting) {
                 if (stoppingSoon) {
-                    CancelFinishTimer();
                 }
+                CancelFinishTimer();
+
                 currentTrickScore += CalculateContinuousScore();
                 trickManager.UpdateContinuousUi(this);
             }
+
         }
 
 
@@ -42,6 +47,7 @@ namespace DefaultNamespace.Tricks
 
         public override bool FinishTrick()
         {
+            Debug.Log("nice");
             if (base.FinishTrick()) {
                 trickManager.ReleaseContinuousUiText();
                 return true;

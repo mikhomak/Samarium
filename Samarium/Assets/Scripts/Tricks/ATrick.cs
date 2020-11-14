@@ -1,4 +1,6 @@
-﻿namespace DefaultNamespace.Tricks
+﻿using UnityEngine;
+
+namespace DefaultNamespace.Tricks
 {
     public abstract class ATrick : ITrick
     {
@@ -15,7 +17,7 @@
         protected bool Active;
         protected bool preventedFromStop;
         protected bool stoppingSoon;
-        protected float finishTimerTime = 3f;
+        protected float finishTimerTime = 1.5f;
 
         protected ATrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager)
         {
@@ -29,14 +31,10 @@
             if (stoppingSoon) {
                 stoppingSoon = false;
                 preventedFromStop = true;
-                this.close = close;
-                this.highSpeed = highSpeed;
                 return;
             }
 
             Active = true;
-            this.close = close;
-            this.highSpeed = highSpeed;
         }
 
         public abstract void UpdateTrick();
@@ -49,8 +47,6 @@
 
             currentTrickScore = 0;
             Active = false;
-            this.close = false;
-            this.highSpeed = false;
             return true;
         }
 

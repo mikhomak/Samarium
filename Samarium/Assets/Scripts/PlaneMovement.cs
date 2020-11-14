@@ -122,7 +122,6 @@ namespace DefaultNamespace
             else if (Mathf.Abs(dotProduct) < 0.4f && isDrifting) {
                 isDrifting = false;
             }
-
             HasDotChanged(dotProduct);
         }
 
