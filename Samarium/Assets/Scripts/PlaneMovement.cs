@@ -56,7 +56,7 @@ namespace DefaultNamespace
         {
             var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
             AddTorqueToThePlane(Vector3.forward, inputVal * appliedControl);
-            if (!barrelRoll.IsActive()) {
+            if (inputVal != 0 && !barrelRoll.IsActive()) {
                 barrelRoll.StartTrick();
             }
         }

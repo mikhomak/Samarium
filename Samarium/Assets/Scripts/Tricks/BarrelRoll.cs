@@ -19,15 +19,19 @@ namespace DefaultNamespace.Tricks
 
         public override void StartTrick()
         {
-            if (Active) {
-                return;
-            }
+            if (canStart) {
+                if (Active) {
+                    return;
+                }
 
-            initialRotation = plane.transform.rotation.z;
-            success = false;
-            firstStage = false;
-            Active = true;
-            FinishTrickWithTimer();
+                canStart = false;
+                initialRotation = plane.transform.rotation.z;
+                success = false;
+                firstStage = false;
+                Active = true;
+                FinishTrickWithTimer();
+                Debug.Log("sd");
+            }
         }
 
 
@@ -45,6 +49,11 @@ namespace DefaultNamespace.Tricks
             }
         }
 
+
+        public override string ToString()
+        {
+            return "Barrel Roll";
+        }
 
     }
 }

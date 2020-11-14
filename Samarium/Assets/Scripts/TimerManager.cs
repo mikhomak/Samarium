@@ -5,6 +5,13 @@ using System.Collections.Concurrent;
 
 public class TimerManager : MonoBehaviour
 {
+    
+    /*
+     * IT IS TERRIBLE I KNOW I DID IT ONE YEAR AGO NOT KNOW SHIT ABOUT THAT BUT I DO NOT HAVE TIME TO REDO IT
+     * IT WORKS FOR NOW I HAVE MORE IMPORTANT STAFF
+     *
+     * 
+     */
     private ObjectPool<Timer> timerPool;
 
     public static TimerManager Instance;

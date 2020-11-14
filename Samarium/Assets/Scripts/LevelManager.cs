@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject driftTextGameObject;
     [SerializeField] private GameObject driftCloseGameObject;
     [SerializeField] private GameObject driftHighSpeedGameObject;
-    [SerializeField] private GameObject specialMoveGameObject;
+    [SerializeField] private GameObject barrelRollGameObject;
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
     [SerializeField] private Animator animator;
@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
     private Vector3 initialDriftHighSpeedTextPos;
+    private Vector3 initialBarrelRollTextPos;
     
     private void Start()
     {
@@ -28,13 +29,14 @@ public class LevelManager : MonoBehaviour
         initialDriftTextPos = driftTextGameObject.transform.position;
         initialDriftCloseTextPos = driftCloseGameObject.transform.position;
         initialDriftHighSpeedTextPos = driftHighSpeedGameObject.transform.position;
+        initialBarrelRollTextPos = barrelRollGameObject.transform.position;
         StartCoroutine(JerkDebugText());
     }
 
     public void UpdateCurrentTrick(float currentScore)
     {
         currentTrickScore += currentScore;
-        currentTrickScoreText.text = currentTrickScore + "!";
+        currentTrickScoreText.text = currentTrickScore + "";
     }
 
     public void UpdateDriftClose(bool close)
@@ -57,6 +59,9 @@ public class LevelManager : MonoBehaviour
                 initialDriftCloseTextPos.y + Random.Range(-4, 4));            
             driftHighSpeedGameObject.transform.position = new Vector3(initialDriftHighSpeedTextPos.x + Random.Range(-4, 4),
                 initialDriftHighSpeedTextPos.y + Random.Range(-4, 4));
+            barrelRollGameObject.transform.position = new Vector3(initialBarrelRollTextPos.x + Random.Range(-4, 4),
+                initialBarrelRollTextPos.y + Random.Range(-4, 4));
+    
             yield return new WaitForSeconds(jerkSpeed);
         }
     }
@@ -71,10 +76,19 @@ public class LevelManager : MonoBehaviour
     public void AddSpecialMove(ISpecialTrick specialTrick)
     {
         currentTrickScore *= specialTrick.GetSpecialTrickMultiplier();
-        specialMoveGameObject.SetActive(true);
-        currentTrickScoreText.text = currentTrickScore + "!";
+        animator.Play("BarrelRoll_On");
+        currentTrickScoreText.text = currentTrickScore + "";
+        StartCoroutine(BarrelRollOff());
     }
 
+
+    
+    private IEnumerator BarrelRollOff()
+    {
+        yield return new WaitForSeconds(2f);
+        animator.Play("BarrelRoll_Off");
+    }
+    
     public void AddScore(float addedScore)
     {
         this.score += addedScore;

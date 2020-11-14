@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace DefaultNamespace.Tricks
 {
@@ -52,9 +53,16 @@ namespace DefaultNamespace.Tricks
 
         public virtual void FinishTrickWithTimer()
         {
-            TimerManager.Instance.startTimer(finishTimerTime, FinishTrick);
+            //TimerManager.Instance.startTimer(finishTimerTime, FinishTrick);
+            plane.StartCoroutine(Finish());
             preventedFromStop = false;
             stoppingSoon = true;
+        }
+
+        private IEnumerator Finish()
+        {
+            yield return  new WaitForSeconds(finishTimerTime);
+            FinishTrick();
         }
 
         public float GetCurrentScore()

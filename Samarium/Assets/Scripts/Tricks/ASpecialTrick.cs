@@ -1,4 +1,7 @@
-﻿namespace DefaultNamespace.Tricks
+﻿using System.Collections;
+using UnityEngine;
+
+namespace DefaultNamespace.Tricks
 {
     public abstract class ASpecialTrick : ISpecialTrick
     {
@@ -9,8 +12,11 @@
 
         protected float trickScoreMultiplier = 2f;
         protected bool Active;
-        protected float finishTimerTime = 30f;
+        protected float finishTimerTime = 2f;
+        protected float cooldown = 1.5f;
 
+        protected bool canStart = true;
+        
         protected ASpecialTrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager)
         {
             this.plane = plane;
@@ -18,30 +24,43 @@
             this.trickManager = trickManager;
         }
 
-        public virtual void StartTrick()
-        {
-            if (Active) {
-                return;
-            }
-            Active = true;
-        }
+        public abstract void StartTrick();
 
         public abstract void UpdateTrick();
 
         public virtual bool FinishTrick()
         {
-            Active = false;
-            if (success) {
-                trickManager.AddSpecialMove(this);
+            if (Active) {
+                Active = false;
+                if (success) {
+                    trickManager.AddSpecialMove(this);
+                }
             }
+
+            canStart = false;
+            plane.StartCoroutine(Cooldown());
             return true;
         }
 
         public virtual void FinishTrickWithTimer()
         {
-            TimerManager.Instance.startTimer(finishTimerTime, FinishTrick);
+            //TimerManager.Instance.startTimer(finishTimerTime, FinishTrick);
+            plane.StartCoroutine(Finish());
         }
 
+        protected IEnumerator Cooldown()
+        {
+            yield return new WaitForSeconds(cooldown);
+            canStart = true;
+        }
+        
+        protected IEnumerator Finish()
+        {
+            yield return new WaitForSeconds(finishTimerTime);
+            FinishTrick();
+        }
+        
+        
         public float GetCurrentScore()
         {
             return success ? trickScoreMultiplier : 0;
