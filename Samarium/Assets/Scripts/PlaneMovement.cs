@@ -109,8 +109,23 @@ namespace DefaultNamespace
             else if (Mathf.Abs(dotProduct) < 0.4f && isDrifting) {
                 isDrifting = false;
             }
+
+            HasDotChanged(dotProduct);
         }
 
+        private void HasDotChanged(float newDot)
+        {
+            if (plane.TrickManager.DriftTrick.IsActive()) {
+                return;
+            }
+
+            var absPreviousDot = Mathf.Abs(dot);
+            var absDot = Mathf.Abs(newDot);
+            if (absPreviousDot < 0.4f && absDot > 0.4f) {
+                plane.TrickManager.DriftTrick.StartTrick();
+                Debug.Log("new dot");
+            }
+        }
 
         public bool IsDrifting()
         {
