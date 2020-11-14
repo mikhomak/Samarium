@@ -15,6 +15,7 @@ namespace DefaultNamespace.Tricks
             planeMovement, trickManager)
         {
             trickScoreMultiplier = 1.4f;
+            finishTimerTime = 4;
             cooldown = 3f;
         }
 
