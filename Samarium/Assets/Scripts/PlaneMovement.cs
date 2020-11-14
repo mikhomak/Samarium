@@ -97,7 +97,7 @@ namespace DefaultNamespace
             Debug.DrawLine(transform.position,
                 transform.position + velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic),
                 Color.red);
-            Debug.Log(dotProduct);
+            //Debug.Log(dotProduct);
             if (dotProduct < -0.4f) {
                 rbd.AddForce(velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic));
             }
@@ -109,15 +109,19 @@ namespace DefaultNamespace
         {
             float absPreviousDot = Mathf.Abs(dot);
             float absDot = Mathf.Abs(newDot);
-            if (absPreviousDot < 0.4f && absDot > 0.4f) {
+            if (absPreviousDot < 0.4f && absDot > 0.4f && !plane.TrickManager.Active) {
                 plane.TrickManager.StopCurrentTrick();
                 plane.TrickManager.StartNewTrick(false, false);
+                Debug.Log("new dot");
             }
             else if (absPreviousDot > 0.4f && absDot < 0.4f && plane.TrickManager.Active) {
-                plane.TrickManager.StopCurrentTrick();
+                plane.TrickManager.StopCurrentTrickWithTimer();
+                Debug.Log("stop dot");
             }
 
             dot = newDot;
         }
+        
+        
     }
 }

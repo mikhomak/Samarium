@@ -9,6 +9,8 @@
         private float closeMultiplier = 2f;
         private float highSpeedMultiplier = 1.5f;
         private bool active;
+        private bool preventedFromStop;
+        private bool stoppingSoon;
 
         public TrickManager(LevelManager levelManager)
         {
@@ -17,6 +19,13 @@
 
         public void StartNewTrick(bool close, bool highSpeed)
         {
+            if (stoppingSoon) {
+                stoppingSoon = false;
+                preventedFromStop = true;
+                this.close = close;
+                this.highSpeed = highSpeed;
+                return;
+            }
             active = true;
             this.close = close;
             this.highSpeed = highSpeed;
@@ -41,11 +50,21 @@
 
         public void StopCurrentTrick()
         {
+            if (preventedFromStop) {
+                return;
+            }
             levelManager.AddScore(currentTrickScore);
             currentTrickScore = 0;
             active = false;
             this.close = false;
             this.highSpeed = false;
+        }
+
+        public void StopCurrentTrickWithTimer()
+        {
+            TimerManager.Instance.startTimer(5f, StopCurrentTrick);
+            preventedFromStop = false;
+            stoppingSoon = true;
         }
 
         public void AddClose()
