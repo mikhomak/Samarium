@@ -7,6 +7,7 @@ namespace DefaultNamespace
         private Animator animator;
         private static readonly int Pitch = Animator.StringToHash("pitch");
         private static readonly int Roll = Animator.StringToHash("roll");
+        private static readonly int Yawn = Animator.StringToHash("yawn");
 
         public PlaneAnimatorFacade(Animator animator)
         {
@@ -15,20 +16,19 @@ namespace DefaultNamespace
 
         public void SetPitch(float pitch)
         {
-            /*if (pitch == 0) {
-                return;
-            }
-            animator.Play(pitch > 0.1 ? "pitch" : "pitch_down");*/
+
             animator.SetFloat(Pitch, pitch);
         }
         
         public void SetRoll(float roll)
         {
-            /*if (roll == 0) {
-                return;
-            }
-            animator.Play(roll > 0.1 ? "roll_right" : "roll_left");*/
+
             animator.SetFloat(Roll, roll);
+        }        
+        
+        public void SetYawn(float yawn)
+        {
+            animator.SetFloat(Yawn, yawn);
         }
     }
 }

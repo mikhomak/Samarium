@@ -70,6 +70,7 @@ public class Plane : MonoBehaviour
         TrickManager.TickTricks();
         PlaneAnimatorFacade.SetPitch(pitchInput);
         PlaneAnimatorFacade.SetRoll(rollInput);
+        PlaneAnimatorFacade.SetYawn(yawnInput);
     }
 
 
