@@ -27,7 +27,7 @@ namespace DefaultNamespace
         public void Movement()
         {
             // Adding torque to compensate torque of pitch/roll/yawn
-            rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
+            //rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
             Thrusting();
             CalculateAerodynamics();
             //Debug.Log(currentThrust);
@@ -36,19 +36,19 @@ namespace DefaultNamespace
         public void PitchInput(float inputVal)
         {
             var appliedControl = !thrustUp ? stats.pitchControlThrustDown : stats.pitchControl;
-            AddTorqueToThePlane(transform.right, inputVal * appliedControl);
+            AddTorqueToThePlane(Vector3.right, inputVal * appliedControl);
         }
 
         public void RollInput(float inputVal)
         {
             var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
             //transform.RotateAround(transform.position, transform.forward, inputVal * 2);
-            AddTorqueToThePlane(transform.forward, inputVal * appliedControl);
+            AddTorqueToThePlane(Vector3.forward, inputVal * appliedControl);
         }
 
         public void YawnInput(float inputVal)
         {
-            AddTorqueToThePlane(transform.up, inputVal * stats.yawnControl);
+            AddTorqueToThePlane(Vector3.up, inputVal * stats.yawnControl);
         }
 
         public void ThrustInput(float inputVal)
@@ -73,9 +73,10 @@ namespace DefaultNamespace
         {
             if (Math.Abs(inputVal) > FLOAT_TOLERANCE) {
                 var tiltVector = Vector3.Lerp(Vector3.zero, direction * (inputVal * stats.airControl), 0.1f);
-                rbd.AddTorque(tiltVector);
+                //rbd.AddTorque(tiltVector);
                 //Quaternion target = Quaternion.Euler(direction * inputVal * 90);
                 //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 5f);
+                transform.Rotate(direction * 60 * inputVal*Time.deltaTime);
             }
         }
 
@@ -94,11 +95,11 @@ namespace DefaultNamespace
             var velocity = rbd.velocity.normalized;
             var upVector = transform.up;
             float dotProduct = Vector3.Dot(upVector, velocity);
-            if (dotProduct < 0) {
-                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
-                if (dotProduct < -0.4) {
-                    plane.AddScore(1);
-                }
+            //Debug.Log(Mathf.Cos(Vector3.Angle(upVector ,velocity)));
+            Debug.Log(dotProduct);
+            rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
+            if (Mathf.Abs(dotProduct) > 0.4) {
+                plane.AddScore(1);
             }
         }
     }
