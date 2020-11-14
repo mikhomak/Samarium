@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace.Tricks;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -18,12 +19,21 @@ namespace DefaultNamespace
         private float dot;
         private bool isDrifting;
 
+        private BarrelRoll barrelRoll;
+        private DriftTrick driftTrick;
+
         public PlaneMovement(Plane plane, Rigidbody rbd, Stats stats, Transform transform)
         {
             this.plane = plane;
             this.rbd = rbd;
             this.stats = stats;
             this.transform = transform;
+        }
+
+        public void PostConstruct()
+        {
+            barrelRoll = plane.TrickManager.BarrelRoll;
+            driftTrick = plane.TrickManager.DriftTrick;
         }
 
         public void Movement()
@@ -45,6 +55,9 @@ namespace DefaultNamespace
         {
             var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
             AddTorqueToThePlane(Vector3.forward, inputVal * appliedControl);
+            if (!barrelRoll.IsActive()) {
+                barrelRoll.StartTrick();
+            }
         }
 
         public void YawnInput(float inputVal)
@@ -115,14 +128,14 @@ namespace DefaultNamespace
 
         private void HasDotChanged(float newDot)
         {
-            if (plane.TrickManager.DriftTrick.IsActive()) {
+            if (driftTrick.IsActive()) {
                 return;
             }
 
             var absPreviousDot = Mathf.Abs(dot);
             var absDot = Mathf.Abs(newDot);
             if (absPreviousDot < 0.4f && absDot > 0.4f) {
-                plane.TrickManager.DriftTrick.StartTrick();
+                driftTrick.StartTrick();
                 Debug.Log("new dot");
             }
         }

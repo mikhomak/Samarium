@@ -2263,7 +2263,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Drift 150!
+  m_Text: 
 --- !u!222 &1373612665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2401,7 +2401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462814640}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Drift text panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

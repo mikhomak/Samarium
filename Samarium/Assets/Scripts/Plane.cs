@@ -32,6 +32,7 @@ public class Plane : MonoBehaviour
 
         PlaneMovement = new PlaneMovement(this, rbd, stats, transform);
         TrickManager = new TrickManager(levelManager, this);
+        PlaneMovement.PostConstruct();
     }
 
     private void RegisterInputs()

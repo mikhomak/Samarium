@@ -7,7 +7,6 @@ namespace DefaultNamespace.Tricks
 
         public DriftTrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane, planeMovement, trickManager)
         {
-            Active = true;
         }
         
         public override void UpdateTrick()

@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject driftCloseGameObject;
     [SerializeField] private GameObject driftHighSpeedGameObject;
+    [SerializeField] private GameObject specialMoveGameObject;
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
 
@@ -41,6 +42,11 @@ public class LevelManager : MonoBehaviour
         currentTrickScoreText.text = "";
         AddScore(currentTrickScore);
         currentTrickScore = 0;
+    }
+
+    public void AddSpecialMove()
+    {
+        specialMoveGameObject.SetActive(true);
     }
 
     public void AddScore(float addedScore)
