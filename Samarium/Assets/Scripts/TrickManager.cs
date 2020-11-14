@@ -58,7 +58,7 @@ namespace DefaultNamespace
         public void SetHighSpeed(bool highSpeed)
         {
             tricks.ForEach(trick => trick.SetHighSpeed(highSpeed));
-            levelManager.UpdateDriftClose(highSpeed);
+            levelManager.UpdateDriftHighSpeed(highSpeed);
         }
     }
 }

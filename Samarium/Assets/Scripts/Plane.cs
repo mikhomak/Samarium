@@ -57,6 +57,10 @@ public class Plane : MonoBehaviour
         inputMaster.Disable();
     }
 
+    public void UpdateHighSpeed(bool highSpeed)
+    {
+        TrickManager.SetHighSpeed(highSpeed);
+    }
     private void FixedUpdate()
     {
         float rollInput = inputMaster.Player.Roll.ReadValue<float>();

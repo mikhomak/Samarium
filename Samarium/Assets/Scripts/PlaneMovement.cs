@@ -18,6 +18,7 @@ namespace DefaultNamespace
         private bool thrustUp;
         private float dot;
         private bool isDrifting;
+        private bool highSpeed;
 
         private BarrelRoll barrelRoll;
         private DriftTrick driftTrick;
@@ -100,6 +101,14 @@ namespace DefaultNamespace
 
             Vector3 velocity = Vector3.Lerp(rbd.velocity, transform.forward * speed, stats.lerpValueVelocity);
             rbd.velocity = velocity;
+            if (speed == stats.maxSpeed && !highSpeed) {
+                plane.UpdateHighSpeed(true);
+                highSpeed = true;
+            }
+            else if(speed < stats.maxSpeed && highSpeed) {
+                plane.UpdateHighSpeed(false);
+                highSpeed = false;
+            }
         }
 
         private void CalculateAerodynamics()

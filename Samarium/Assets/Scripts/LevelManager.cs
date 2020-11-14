@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
     [SerializeField] private Animator animator;
+    [SerializeField] public float jerkSpeed = 0.05f;
 
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
@@ -43,12 +44,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateDriftHighSpeed(bool highSpeed)
     {
-        if (!highSpeed && driftHighSpeedGameObject.active) {
-            driftHighSpeedGameObject.SetActive(false);
-        }
-        else if (highSpeed && !driftHighSpeedGameObject.active) {
-            driftHighSpeedGameObject.SetActive(true);
-        }
+        animator.Play(highSpeed ? "HighSpeedOn" : "HighSpeedOff"); // why tf no who is gonna stop me
     }
 
 
@@ -61,7 +57,7 @@ public class LevelManager : MonoBehaviour
                 initialDriftCloseTextPos.y + Random.Range(-4, 4));            
             driftHighSpeedGameObject.transform.position = new Vector3(initialDriftHighSpeedTextPos.x + Random.Range(-4, 4),
                 initialDriftHighSpeedTextPos.y + Random.Range(-4, 4));
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(jerkSpeed);
         }
     }
     
