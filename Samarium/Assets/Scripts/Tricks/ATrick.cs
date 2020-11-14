@@ -10,8 +10,8 @@
         protected float currentTrickScore;
         protected bool close;
         protected bool highSpeed;
-        protected float closeMultiplier = 2f;
-        protected float highSpeedMultiplier = 1.5f;
+        protected const float CLOSE_MULTIPLIER = 2f;
+        protected const float HIGH_SPEED_MULTIPLIER = 1.5f;
         protected bool Active;
         protected bool preventedFromStop;
         protected bool stoppingSoon;
@@ -75,6 +75,16 @@
         public bool IsActive()
         {
             return Active;
+        }
+
+        public void SetClose(bool close)
+        {
+            this.close = close;
+        }
+
+        public void SetHighSpeed(bool highSpeed)
+        {
+            this.highSpeed = highSpeed;
         }
     }
 }

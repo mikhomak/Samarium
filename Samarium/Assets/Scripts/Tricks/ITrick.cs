@@ -11,5 +11,7 @@ namespace DefaultNamespace.Tricks
         string ToString();
         float GetCurrentScore();
         bool IsActive();
+        void SetClose(bool close);
+        void SetHighSpeed(bool highSpeed);
     }
 }

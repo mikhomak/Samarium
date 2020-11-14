@@ -30,11 +30,11 @@ namespace DefaultNamespace.Tricks
         {
             float scoreToAdd = 1;
             if (close) {
-                scoreToAdd *= closeMultiplier;
+                scoreToAdd *= CLOSE_MULTIPLIER;
             }
 
             if (highSpeed) {
-                scoreToAdd *= highSpeedMultiplier;
+                scoreToAdd *= HIGH_SPEED_MULTIPLIER;
             }
 
             return scoreToAdd;
