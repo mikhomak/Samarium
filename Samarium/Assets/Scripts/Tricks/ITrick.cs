@@ -6,7 +6,7 @@ namespace DefaultNamespace.Tricks
     {
         void StartTrick();
         void UpdateTrick();
-        void FinishTrick();
+        bool FinishTrick();
         void FinishTrickWithTimer();
         string ToString();
         float GetCurrentScore();

@@ -40,6 +40,17 @@ namespace DefaultNamespace.Tricks
             return scoreToAdd;
         }
 
+
+        public override bool FinishTrick()
+        {
+            if (base.FinishTrick()) {
+                trickManager.ReleaseContinuousUiText();
+                return true;
+            }
+
+            return false;
+        }
+
         public override string ToString()
         {
             return "Drift";

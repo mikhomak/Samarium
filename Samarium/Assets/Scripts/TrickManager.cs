@@ -26,6 +26,11 @@ namespace DefaultNamespace
             levelManager.UpdateCurrentTrick(continuousTrick.ToString(), continuousTrick.GetCurrentScore());
         }
 
+        public void ReleaseContinuousUiText()
+        {
+            levelManager.ReleaseCurrentTrick();
+        }
+        
         public void TickTricks()
         {
             tricks.ForEach(trick =>

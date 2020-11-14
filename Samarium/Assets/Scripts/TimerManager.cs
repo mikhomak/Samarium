@@ -36,7 +36,7 @@ public class TimerManager : MonoBehaviour {
         timerPool.release(timer);
     }
 
-    public void startTimer(float time, Action timerEndEvent) {
+    public void startTimer(float time, Func<bool> timerEndEvent) {
         Timer timer = timerPool.get();
         timer.Action = timerEndEvent;
         timer.EndTime = time;
@@ -49,9 +49,9 @@ public class TimerManager : MonoBehaviour {
             Timer class
             You can move it to a different file
     */
-    public class Timer {
+    public class  Timer {
         private float endTime;
-        private Action action;
+        private Func<bool> action;
         private TimerManager timerManager;
 
 
@@ -63,7 +63,7 @@ public class TimerManager : MonoBehaviour {
             set => endTime = value;
         }
 
-        public Action Action {
+        public Func<bool> Action {
             set => action = value;
         }
 

@@ -41,17 +41,17 @@
 
         public abstract void UpdateTrick();
 
-        public virtual void FinishTrick()
+        public virtual bool FinishTrick()
         {
             if (preventedFromStop) {
-                return;
+                return false;
             }
 
-            //levelManager.AddScore(currentTrickScore);
             currentTrickScore = 0;
             Active = false;
             this.close = false;
             this.highSpeed = false;
+            return true;
         }
 
         public virtual void FinishTrickWithTimer()
