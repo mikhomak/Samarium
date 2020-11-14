@@ -740,8 +740,8 @@ MonoBehaviour:
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.1
-  m_SoftZoneHeight: 0.1
+  m_SoftZoneWidth: 0
+  m_SoftZoneHeight: 0
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -1262,13 +1262,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.32952264, y: 0.13811032, z: 0.26461488, w: 0.89572287}
+  m_LocalPosition: {x: 74.6, y: 180.8, z: -129.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 31.147, y: 29.529, z: 41.318}
 --- !u!1 &731796082
 GameObject:
   m_ObjectHideFlags: 3
@@ -1520,11 +1520,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: airControl
-      value: 40
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: aerodynamic
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: rollControl
@@ -1536,11 +1536,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: lerpValueVelocity
-      value: 0.03
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: rollControlThrustUp
-      value: 1.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: accelerationNoThrottle
@@ -1548,7 +1548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: accelerationThrottleUp
-      value: 90
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7092310111556614125, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: pitchControlThrustDown
@@ -1563,12 +1563,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: m_AngularDrag
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7931036886020955358, guid: 2284a8211b5acd14a9ec9e4502bf5f46, type: 3}
       propertyPath: m_Constraints

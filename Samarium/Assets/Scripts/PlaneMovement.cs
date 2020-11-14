@@ -95,13 +95,13 @@ namespace DefaultNamespace
             var upVector = transform.up;
             float dotProduct = Vector3.Dot(upVector, velocity);
             //Debug.Log(Mathf.Cos(Vector3.Angle(upVector ,velocity)));
-            Debug.DrawLine(transform.position, transform.position + velocity * (dotProduct * stats.aerodynamic), Color.red );
+            Debug.DrawLine(transform.position, transform.position + velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic), Color.red );
             Debug.Log(dotProduct);
             if (Mathf.Abs(dotProduct) > 0.4) {
                 plane.AddScore(1);
             }
             if (dotProduct < -0.4f) {
-                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
+                rbd.AddForce(velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic));
             }
         }
     }
