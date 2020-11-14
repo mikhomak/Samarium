@@ -13,6 +13,7 @@ namespace DefaultNamespace
         private List<ITrick> tricks;
         public DriftTrick DriftTrick { get; set; }
         public BarrelRoll BarrelRoll { get; set; }
+        public CobraFlip CobraFlip { get; set; }
 
         public TrickManager(LevelManager levelManager, Plane plane)
         {
@@ -21,8 +22,10 @@ namespace DefaultNamespace
             tricks = new List<ITrick>();
             DriftTrick = new DriftTrick(plane, plane.PlaneMovement, this);
             BarrelRoll = new BarrelRoll(plane, plane.PlaneMovement, this);
+            CobraFlip = new CobraFlip(plane, plane.PlaneMovement, this);
             tricks.Add(DriftTrick);
             tricks.Add(BarrelRoll);
+            tricks.Add(CobraFlip);
         }
 
         public void UpdateContinuousUi(float addedValue)

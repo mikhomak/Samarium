@@ -3,18 +3,19 @@ using UnityEngine.Assertions.Comparers;
 
 namespace DefaultNamespace.Tricks
 {
-    public class BarrelRoll : ASpecialTrick
+    public class CobraFlip : ASpecialTrick
     {
-
+        
         private float axisRotation;
         private float initialRotation;
         private bool firstStage;
 
 
-        public BarrelRoll(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
+        public CobraFlip(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
             planeMovement, trickManager)
         {
-            trickScoreMultiplier = 1.2f;
+            trickScoreMultiplier = 1.4f;
+            cooldown = 3f;
         }
 
 
@@ -26,19 +27,18 @@ namespace DefaultNamespace.Tricks
                 }
 
                 canStart = false;
-                initialRotation = plane.transform.rotation.z;
+                initialRotation = plane.transform.rotation.x;
                 success = false;
                 firstStage = false;
                 Active = true;
                 FinishTrickWithTimer();
-                Debug.Log("sd");
             }
         }
 
 
         public override void UpdateTrick()
         {
-            axisRotation = plane.transform.rotation.z;
+            axisRotation = plane.transform.rotation.x;
             if (Mathf.Abs(axisRotation) > 0.5 && !firstStage) {
                 firstStage = true;
             }
@@ -53,8 +53,7 @@ namespace DefaultNamespace.Tricks
 
         public override string ToString()
         {
-            return "Barrel Roll";
+            return "Cobra flip";
         }
-
     }
 }

@@ -22,6 +22,7 @@ namespace DefaultNamespace
 
         private BarrelRoll barrelRoll;
         private DriftTrick driftTrick;
+        private CobraFlip cobraFlip;
 
         public PlaneMovement(Plane plane, Rigidbody rbd, Stats stats, Transform transform)
         {
@@ -35,6 +36,7 @@ namespace DefaultNamespace
         {
             barrelRoll = plane.TrickManager.BarrelRoll;
             driftTrick = plane.TrickManager.DriftTrick;
+            cobraFlip = plane.TrickManager.CobraFlip;
         }
 
         public void Movement()
@@ -50,6 +52,9 @@ namespace DefaultNamespace
         {
             var appliedControl = !thrustUp ? stats.pitchControlThrustDown : stats.pitchControl;
             AddTorqueToThePlane(Vector3.right, inputVal * appliedControl);
+            if (inputVal != 0 && !cobraFlip.IsActive()) {
+                cobraFlip.StartTrick();
+            }
         }
 
         public void RollInput(float inputVal)
