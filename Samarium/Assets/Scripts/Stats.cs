@@ -12,6 +12,7 @@ public class Stats : MonoBehaviour
     public float accelerationThrottleDown = -50f;
     public float accelerationNoThrottle = -40f;
     public float accelerationThrottleUp = 90f;
+    public float rotationSpeed = 60f;
     [Header("Speed")]
     public float airControl = 40f;
     public float aerodynamic = 150f;

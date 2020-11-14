@@ -27,7 +27,7 @@ namespace DefaultNamespace
         public void Movement()
         {
             // Adding torque to compensate torque of pitch/roll/yawn
-            //rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
+            rbd.AddTorque(rbd.angularVelocity * -1f / 0.5f);
             Thrusting();
             CalculateAerodynamics();
             //Debug.Log(currentThrust);
@@ -42,7 +42,6 @@ namespace DefaultNamespace
         public void RollInput(float inputVal)
         {
             var appliedControl = thrustUp ? stats.rollControlThrustUp : stats.rollControl;
-            //transform.RotateAround(transform.position, transform.forward, inputVal * 2);
             AddTorqueToThePlane(Vector3.forward, inputVal * appliedControl);
         }
 
@@ -72,11 +71,11 @@ namespace DefaultNamespace
         private void AddTorqueToThePlane(Vector3 direction, float inputVal)
         {
             if (Math.Abs(inputVal) > FLOAT_TOLERANCE) {
-                var tiltVector = Vector3.Lerp(Vector3.zero, direction * (inputVal * stats.airControl), 0.1f);
-                //rbd.AddTorque(tiltVector);
+                //var tiltVector = Vector3.Lerp(Vector3.zero, direction * (inputVal * stats.airControl), 0.1f);
+                //rbd.AddTorque(tiltVector, ForceMode.VelocityChange);
                 //Quaternion target = Quaternion.Euler(direction * inputVal * 90);
                 //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 5f);
-                transform.Rotate(direction * 60 * inputVal*Time.deltaTime);
+                transform.Rotate(direction * (stats.rotationSpeed * inputVal * Time.deltaTime));
             }
         }
 
@@ -96,10 +95,13 @@ namespace DefaultNamespace
             var upVector = transform.up;
             float dotProduct = Vector3.Dot(upVector, velocity);
             //Debug.Log(Mathf.Cos(Vector3.Angle(upVector ,velocity)));
+            Debug.DrawLine(transform.position, transform.position + velocity * (dotProduct * stats.aerodynamic), Color.red );
             Debug.Log(dotProduct);
-            rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
             if (Mathf.Abs(dotProduct) > 0.4) {
                 plane.AddScore(1);
+            }
+            if (dotProduct < -0.4f) {
+                rbd.AddForce(velocity * (dotProduct * stats.aerodynamic));
             }
         }
     }
