@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Tricks;
+﻿using System;
+using DefaultNamespace.Tricks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject specialMoveGameObject;
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
+    [SerializeField] private Animator animator;
+    
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void UpdateCurrentTrick(float currentScore)
     {
@@ -20,12 +27,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateDriftClose(bool close)
     {
-        if (!close && driftCloseGameObject.active) {
-            driftCloseGameObject.SetActive(false);
-        }
-        else if (close && !driftCloseGameObject.active) {
-            driftCloseGameObject.SetActive(true);
-        }
+        animator.Play(close ? "CloseOn" : "CloseOff"); // why tf no who is gonna stop me
     }
 
     public void UpdateDriftHighSpeed(bool highSpeed)
