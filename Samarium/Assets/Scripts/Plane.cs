@@ -9,12 +9,14 @@ public class Plane : MonoBehaviour
     [SerializeField] private Stats stats;
     [SerializeField] private InputMaster inputMaster;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private Animator animator;
 
     [Header("Score")] private int closeMultiplier = 2;
     private float highSpeedMultiplier = 1.5f;
 
     public TrickManager TrickManager { get; set; }
     public PlaneMovement PlaneMovement { get; set; }
+    public PlaneAnimatorFacade PlaneAnimatorFacade { get; set; }
 
     private void Awake()
     {
@@ -30,9 +32,14 @@ public class Plane : MonoBehaviour
             rbd = GetComponent<Rigidbody>();
         }
 
+        if (animator == null) {
+            animator = GetComponentInChildren<Animator>();
+        }
+
         PlaneMovement = new PlaneMovement(this, rbd, stats, transform);
         TrickManager = new TrickManager(levelManager, this);
         PlaneMovement.PostConstruct();
+        PlaneAnimatorFacade = new PlaneAnimatorFacade(animator);
     }
 
     private void RegisterInputs()
@@ -52,12 +59,17 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlaneMovement.PitchInput(inputMaster.Player.Pitch.ReadValue<float>());
-        PlaneMovement.RollInput(inputMaster.Player.Roll.ReadValue<float>());
-        PlaneMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
+        float rollInput = inputMaster.Player.Roll.ReadValue<float>();
+        float pitchInput = inputMaster.Player.Pitch.ReadValue<float>();
+        float yawnInput = inputMaster.Player.Yawn.ReadValue<float>();
+        PlaneMovement.PitchInput(pitchInput);
+        PlaneMovement.RollInput(rollInput);
+        PlaneMovement.YawnInput(yawnInput);
         PlaneMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
         PlaneMovement.Movement();
         TrickManager.TickTricks();
+        PlaneAnimatorFacade.SetPitch(pitchInput);
+        PlaneAnimatorFacade.SetRoll(rollInput);
     }
 
 
