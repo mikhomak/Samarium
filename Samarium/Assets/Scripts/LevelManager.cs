@@ -41,12 +41,23 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateDriftClose(bool close)
     {
-        animator.Play(close ? "CloseOn" : "CloseOff"); // why tf no who is gonna stop me
+        if(close && currentTrickScore != 0){
+            animator.Play("CloseOn" ); // why tf no who is gonna stop me
+        }
+        else if(!close) {
+            animator.Play("CloseOff"); 
+        }
     }
 
     public void UpdateDriftHighSpeed(bool highSpeed)
     {
-        animator.Play(highSpeed ? "HighSpeedOn" : "HighSpeedOff"); // why tf no who is gonna stop me
+        if(highSpeed && currentTrickScore != 0){
+            animator.Play("HighSpeedOn" );
+        }
+        else if(!highSpeed) {
+            animator.Play("HighSpeedOff"); 
+        }
+
     }
 
 
