@@ -101,10 +101,12 @@ public class LevelManager : MonoBehaviour
     public void AddSpecialMove(ISpecialTrick specialTrick)
     {
         currentTrickScore *= specialTrick.GetSpecialTrickMultiplier();
-        currentTrickScoreText.text = currentTrickScore + "";
+        if (currentTrickScore != 0) {
+            currentTrickScoreText.text = currentTrickScore + "";
+        }
+
         if(specialTrick is BarrelRoll) {
             barrelRollAnimation.Play("BarrelRollOn");
-            //animator.CrossFade("BarrelRoll_On",0);
             StartCoroutine(BarrelRollOff());
         }
         else {
@@ -118,7 +120,6 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         barrelRollAnimation.Play("BarrelRollOff");
-        //animator.CrossFade("BarrelRoll_Off",0f);
     }
     
     private IEnumerator CobraFlipOff()

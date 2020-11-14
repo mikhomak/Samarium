@@ -132,9 +132,11 @@ namespace DefaultNamespace
 
             if (Mathf.Abs(dotProduct) > 0.4f && !isDrifting) {
                 isDrifting = true;
+                plane.EnableDriftTraces();
             }
             else if (Mathf.Abs(dotProduct) < 0.4f && isDrifting) {
                 isDrifting = false;
+                plane.DisableDriftTraces();
             }
             HasDotChanged(dotProduct);
         }

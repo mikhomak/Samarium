@@ -10,6 +10,8 @@ public class Plane : MonoBehaviour
     [SerializeField] private InputMaster inputMaster;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private Animator animator;
+    [SerializeField] private TrailRenderer trailLeftTR;
+    [SerializeField] private TrailRenderer trailRightTR;
 
     [Header("Score")] private int closeMultiplier = 2;
     private float highSpeedMultiplier = 1.5f;
@@ -77,5 +79,15 @@ public class Plane : MonoBehaviour
         PlaneAnimatorFacade.SetYawn(yawnInput);
     }
 
-
+    public void EnableDriftTraces()
+    {
+        trailLeftTR.emitting = true;
+        trailRightTR.emitting = true;
+    }
+    
+    public void DisableDriftTraces()
+    {
+        trailLeftTR.emitting = false;
+        trailRightTR.emitting = false;
+    }
 }
