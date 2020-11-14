@@ -1,86 +1,39 @@
-﻿namespace DefaultNamespace
+﻿using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace.Tricks;
+
+namespace DefaultNamespace
 {
     public class TrickManager
     {
         private LevelManager levelManager;
-        private float currentTrickScore;
-        private bool close;
-        private bool highSpeed;
-        private float closeMultiplier = 2f;
-        private float highSpeedMultiplier = 1.5f;
-        private bool active;
-        private bool preventedFromStop;
-        private bool stoppingSoon;
+        private Plane plane;
 
-        public TrickManager(LevelManager levelManager)
+        private List<ITrick> tricks;
+        public DriftTrick DriftTrick { get; set; }
+
+        public TrickManager(LevelManager levelManager, Plane plane)
         {
             this.levelManager = levelManager;
+            this.plane = plane;
+            tricks = new List<ITrick>();
+            DriftTrick = new DriftTrick(plane, plane.PlaneMovement, this);
+            tricks.Add(DriftTrick);
         }
 
-        public void StartNewTrick(bool close, bool highSpeed)
+        public void UpdateContinuousUi(IContinuousTrick continuousTrick)
         {
-            if (stoppingSoon) {
-                stoppingSoon = false;
-                preventedFromStop = true;
-                this.close = close;
-                this.highSpeed = highSpeed;
-                return;
-            }
-            active = true;
-            this.close = close;
-            this.highSpeed = highSpeed;
+            levelManager.UpdateCurrentTrick(continuousTrick.ToString(), continuousTrick.GetCurrentScore());
         }
 
-        public void TickTrickManger()
+        public void TickTricks()
         {
-            if (active) {
-                float scoreToAdd = 1;
-                if (close) {
-                    scoreToAdd *= closeMultiplier;
+            tricks.ForEach(trick =>
+            {
+                if (trick.IsActive()) {
+                    trick.UpdateTrick();
                 }
-
-                if (highSpeed) {
-                    scoreToAdd *= highSpeedMultiplier;
-                }
-
-                currentTrickScore += scoreToAdd;
-            }
-            levelManager.UpdateCurrentTrick(currentTrickScore);
-        }
-
-        public void StopCurrentTrick()
-        {
-            if (preventedFromStop) {
-                return;
-            }
-            levelManager.AddScore(currentTrickScore);
-            currentTrickScore = 0;
-            active = false;
-            this.close = false;
-            this.highSpeed = false;
-        }
-
-        public void StopCurrentTrickWithTimer()
-        {
-            TimerManager.Instance.startTimer(5f, StopCurrentTrick);
-            preventedFromStop = false;
-            stoppingSoon = true;
-        }
-
-        public void AddClose()
-        {
-            close = true;
-        }
-
-        public void AddHighSpeed()
-        {
-            highSpeed = true;
-        }
-
-        public bool Active
-        {
-            get => active;
-            set => active = value;
+            });
         }
     }
 }

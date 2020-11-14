@@ -10,9 +10,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]private Text currentTrickScoreText;
 
 
-    public void UpdateCurrentTrick(float currentScore)
+    public void UpdateCurrentTrick(string name, float currentScore)
     {
-        currentTrickScoreText.text = currentScore + "!";
+        currentTrickScoreText.text = name + " " +currentScore + "!";
     }
     
     public void AddScore(float addedScore)

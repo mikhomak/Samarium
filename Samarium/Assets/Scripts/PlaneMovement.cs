@@ -16,6 +16,7 @@ namespace DefaultNamespace
         private float currentThrust;
         private bool thrustUp;
         private float dot;
+        private bool isDrifting;
 
         public PlaneMovement(Plane plane, Rigidbody rbd, Stats stats, Transform transform)
         {
@@ -102,26 +103,20 @@ namespace DefaultNamespace
                 rbd.AddForce(velocity * (Mathf.Cos(Vector3.Angle(upVector, velocity)) * stats.aerodynamic));
             }
 
-            HasDotChanged(dotProduct);
+            if (Mathf.Abs(dotProduct) > 0.4f && !isDrifting) {
+                isDrifting = true;
+            }
+            else if (Mathf.Abs(dotProduct) < 0.4f && isDrifting) {
+                isDrifting = false;
+            }
         }
 
-        private void HasDotChanged(float newDot)
+
+        public bool IsDrifting()
         {
-            float absPreviousDot = Mathf.Abs(dot);
-            float absDot = Mathf.Abs(newDot);
-            if (absPreviousDot < 0.4f && absDot > 0.4f && !plane.TrickManager.Active) {
-                plane.TrickManager.StopCurrentTrick();
-                plane.TrickManager.StartNewTrick(false, false);
-                Debug.Log("new dot");
-            }
-            else if (absPreviousDot > 0.4f && absDot < 0.4f && plane.TrickManager.Active) {
-                plane.TrickManager.StopCurrentTrickWithTimer();
-                Debug.Log("stop dot");
-            }
-
-            dot = newDot;
+            return isDrifting;
         }
-        
-        
+
+
     }
 }

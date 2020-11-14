@@ -12,14 +12,14 @@ public class Plane : MonoBehaviour
 
     [Header("Score")] private int closeMultiplier = 2;
     private float highSpeedMultiplier = 1.5f;
-    
-    private PlaneMovement planeMovement;
-    private TrickManager trickManager;
+
+    public TrickManager TrickManager { get; set; }
+    public PlaneMovement PlaneMovement { get; set; }
 
     private void Awake()
     {
-        InitComponents();
         RegisterInputs();
+        InitComponents();
     }
 
 
@@ -29,8 +29,9 @@ public class Plane : MonoBehaviour
         if (rbd == null) {
             rbd = GetComponent<Rigidbody>();
         }
-        trickManager = new TrickManager(levelManager);
-        planeMovement = new PlaneMovement(this, rbd, stats, transform);
+
+        PlaneMovement = new PlaneMovement(this, rbd, stats, transform);
+        TrickManager = new TrickManager(levelManager, this);
     }
 
     private void RegisterInputs()
@@ -50,19 +51,13 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
-        planeMovement.PitchInput(inputMaster.Player.Pitch.ReadValue<float>());
-        planeMovement.RollInput(inputMaster.Player.Roll.ReadValue<float>());
-        planeMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
-        planeMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
-        planeMovement.Movement();
-        trickManager.TickTrickManger();
+        PlaneMovement.PitchInput(inputMaster.Player.Pitch.ReadValue<float>());
+        PlaneMovement.RollInput(inputMaster.Player.Roll.ReadValue<float>());
+        PlaneMovement.YawnInput(inputMaster.Player.Yawn.ReadValue<float>());
+        PlaneMovement.ThrustInput(inputMaster.Player.Thrust.ReadValue<float>());
+        PlaneMovement.Movement();
+        TrickManager.TickTricks();
     }
 
-
-    public TrickManager TrickManager
-    {
-        get => trickManager;
-        set => trickManager = value;
-    }
 
 }
