@@ -86,5 +86,15 @@
         {
             this.highSpeed = highSpeed;
         }
+
+        public bool GetClose()
+        {
+            return close;
+        }
+
+        public bool GetHighSpeed()
+        {
+            return highSpeed;
+        }
     }
 }

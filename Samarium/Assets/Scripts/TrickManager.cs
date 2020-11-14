@@ -44,11 +44,13 @@ namespace DefaultNamespace
         public void SetClose(bool close)
         {
             tricks.ForEach(trick => trick.SetClose(close));
+            levelManager.UpdateDriftClose(close);
         }
 
         public void SetHighSpeed(bool highSpeed)
         {
             tricks.ForEach(trick => trick.SetHighSpeed(highSpeed));
+            levelManager.UpdateDriftClose(highSpeed);
         }
     }
 }

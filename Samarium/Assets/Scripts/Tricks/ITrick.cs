@@ -13,5 +13,7 @@ namespace DefaultNamespace.Tricks
         bool IsActive();
         void SetClose(bool close);
         void SetHighSpeed(bool highSpeed);
+        bool GetClose();
+        bool GetHighSpeed();
     }
 }
