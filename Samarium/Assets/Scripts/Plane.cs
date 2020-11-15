@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -12,10 +13,13 @@ public class Plane : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private TrailRenderer trailLeftTR;
     [SerializeField] private TrailRenderer trailRightTR;
+    [SerializeField] private AudioSource driftSource;
+    [SerializeField] private ParticleSystem hitPS;
 
-    [Header("Score")] private int closeMultiplier = 2;
-    private float highSpeedMultiplier = 1.5f;
 
+
+    private bool stopAudioManagement;
+    
     public TrickManager TrickManager { get; set; }
     public PlaneMovement PlaneMovement { get; set; }
     public PlaneAnimatorFacade PlaneAnimatorFacade { get; set; }
@@ -82,17 +86,46 @@ public class Plane : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         levelManager.ResetCurrentScore();
+        hitPS.Emit(150);
     }
 
     public void EnableDriftTraces()
     {
+        stopAudioManagement = true;
         trailLeftTR.emitting = true;
         trailRightTR.emitting = true;
+        StartCoroutine(ProgressivelyIncreaseVolume());
     }
     
     public void DisableDriftTraces()
     {
+        stopAudioManagement = true;
         trailLeftTR.emitting = false;
-        trailRightTR.emitting = false;
+        trailRightTR.emitting = false; 
+        StartCoroutine(ProgressivelyDecreaseVolume());
+    }
+
+    private IEnumerator ProgressivelyIncreaseVolume()
+    {
+        stopAudioManagement = false;
+        while (Math.Abs(driftSource.volume - 0.85f) > 0.1f) {
+            if (stopAudioManagement) {
+                yield break;
+            }
+            driftSource.volume += 0.1f;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }    
+    
+    private IEnumerator ProgressivelyDecreaseVolume()
+    {
+        stopAudioManagement = false;
+        while (Math.Abs(driftSource.volume - 0f) > 0.01f) {
+            if (stopAudioManagement) {
+                yield break;
+            }
+            driftSource.volume -= 0.1f;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }

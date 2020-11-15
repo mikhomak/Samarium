@@ -120,6 +120,7 @@ public class LevelManager : MonoBehaviour
     public void ResetCurrentScore()
     {
         currentTrickScore = 0;
+        currentTrickScoreText.text = ((int) currentTrickScore).ToString();
     }
 
     public void DoubleCurrentScore()

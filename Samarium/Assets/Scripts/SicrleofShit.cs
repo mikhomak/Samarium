@@ -8,8 +8,11 @@ public class SicrleofShit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Plane>() != null) {
-            levelManager.DoubleCurrentScore();
-            
+            if (!hasApplied) {
+                levelManager.DoubleCurrentScore();
+                hasApplied = true;
+                Destroy(gameObject);
+            }
         }
     }
 
