@@ -14,7 +14,7 @@ namespace DefaultNamespace.Tricks
         public BarrelRoll(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
             planeMovement, trickManager)
         {
-            trickScoreMultiplier = 1.2f;
+            trickScoreMultiplier = 3f;
         }
 
 

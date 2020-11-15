@@ -14,7 +14,7 @@ namespace DefaultNamespace.Tricks
         public CobraFlip(Plane plane, PlaneMovement planeMovement, TrickManager trickManager) : base(plane,
             planeMovement, trickManager)
         {
-            trickScoreMultiplier = 1.4f;
+            trickScoreMultiplier = 1.5f;
             finishTimerTime = 4;
             cooldown = 3f;
         }

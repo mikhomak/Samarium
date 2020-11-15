@@ -18,7 +18,7 @@ namespace DefaultNamespace.Tricks
         protected bool Active;
         protected bool preventedFromStop;
         protected bool stoppingSoon;
-        protected float finishTimerTime = 1.5f;
+        protected float finishTimerTime = 3f;
 
         protected ATrick(Plane plane, PlaneMovement planeMovement, TrickManager trickManager)
         {

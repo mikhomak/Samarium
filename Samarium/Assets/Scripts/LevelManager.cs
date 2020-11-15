@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject driftCloseGameObject;
     [SerializeField] private GameObject driftHighSpeedGameObject;
     [SerializeField] private GameObject barrelRollGameObject;
-    [SerializeField] private GameObject cobraFlipGameObject;    
+    [SerializeField] private GameObject cobraFlipGameObject;
     [SerializeField] private Animation driftTextAnimation; // wow
     [SerializeField] private Animation driftCloseAnimation; // cool as shit
     [SerializeField] private Animation driftHighSpeedAnimation;
@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
     [SerializeField] public float jerkSpeed = 0.05f;
-    [SerializeField] public float endTimer =60.0f;
+    [SerializeField] public float endTimer = 60.0f;
     [SerializeField] public float timer;
 
     private Vector3 initialDriftTextPos;
@@ -39,26 +39,26 @@ public class LevelManager : MonoBehaviour
         initialDriftHighSpeedTextPos = driftHighSpeedGameObject.transform.position;
         initialBarrelRollTextPos = barrelRollGameObject.transform.position;
         initialCobraFlipTextPos = cobraFlipGameObject.transform.position;
-        
+
         driftCloseAnimation = driftCloseGameObject.GetComponent<Animation>();
         driftHighSpeedAnimation = driftHighSpeedAnimation.GetComponent<Animation>();
         barrelRollAnimation = barrelRollGameObject.GetComponent<Animation>();
         cobraFlipAnimation = cobraFlipGameObject.GetComponent<Animation>();
-        
+
         StartCoroutine(JerkDebugText());
     }
 
     public void UpdateCurrentTrick(float currentScore)
     {
         currentTrickScore += currentScore;
-        currentTrickScoreText.text = currentTrickScore + "";
+        currentTrickScoreText.text = ((int) currentTrickScore).ToString();
     }
 
 
     private void FixedUpdate()
     {
         endTimer -= Time.deltaTime;
-        timerText.text = endTimer + "";
+        timerText.text = ((int) endTimer).ToString();
         if (endTimer < 0) {
             Debug.Log("GameOver");
         }
@@ -115,10 +115,10 @@ public class LevelManager : MonoBehaviour
     {
         currentTrickScore *= specialTrick.GetSpecialTrickMultiplier();
         if (currentTrickScore != 0) {
-            currentTrickScoreText.text = currentTrickScore + "";
+            currentTrickScoreText.text = ((int)currentTrickScore).ToString();
         }
 
-        if(specialTrick is BarrelRoll) {
+        if (specialTrick is BarrelRoll) {
             barrelRollAnimation.Play("BarrelRollOn");
             StartCoroutine(BarrelRollOff());
         }
@@ -134,7 +134,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         barrelRollAnimation.Play("BarrelRollOff");
     }
-    
+
     private IEnumerator CobraFlipOff()
     {
         yield return new WaitForSeconds(2f);
@@ -144,17 +144,17 @@ public class LevelManager : MonoBehaviour
     public void AddScore(float addedScore)
     {
         this.score += addedScore;
-        scoreText.text = "Your score is: \n" + this.score;
+        scoreText.text = "Your score is: \n" + ((int)this.score);
     }
-
 
 
     public void OnBarrelOn()
     {
-        barrelRollGameObject.transform.localScale=Vector3.one;
+        barrelRollGameObject.transform.localScale = Vector3.one;
     }
+
     public void OnBarrelOff()
     {
-        barrelRollGameObject.transform.localScale=Vector3.zero;
+        barrelRollGameObject.transform.localScale = Vector3.zero;
     }
 }
