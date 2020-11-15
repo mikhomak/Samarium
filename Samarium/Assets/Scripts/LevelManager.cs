@@ -5,6 +5,7 @@ using DefaultNamespace.Tricks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Animation driftHighSpeedAnimation;
     [SerializeField] private Animation barrelRollAnimation;
     [SerializeField] private Animation cobraFlipAnimation;
+    [SerializeField] private Animation doubleScoreAnimation;
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
     [SerializeField] public float jerkSpeed = 0.05f;
@@ -39,6 +41,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip cobraAudioClip;
 
     [SerializeField] public AudioSource specialEffectsAudioSource;
+    [SerializeField] public AudioSource musicLoopAudioSource;
 
     [SerializeField] private AudioSource crowdAudioSource;
     // sue me see if i care
@@ -66,6 +69,7 @@ public class LevelManager : MonoBehaviour
         cobraFlipAnimation = cobraFlipGameObject.GetComponent<Animation>();
 
         StartCoroutine(JerkDebugText());
+        Time.timeScale = 1;
     }
 
     public void UpdateCurrentTrick(float currentScore)
@@ -91,6 +95,7 @@ public class LevelManager : MonoBehaviour
         AddScore(currentTrickScore);
         Time.timeScale = 0;
         screenOverGO.SetActive(true);
+        musicLoopAudioSource.Stop();
         if (score > scoreToWin) {
             screenOverText.text = "YOU WON";
         }
@@ -147,6 +152,9 @@ public class LevelManager : MonoBehaviour
     public void DoubleCurrentScore()
     {
         currentTrickScore *= 2;
+        currentTrickScoreText.text = ((int) currentTrickScore).ToString();
+        doubleScoreAnimation.Play("doubleScoreOn");
+        StartCoroutine(DoubleScoreOff());
     }
 
     public void ReleaseCurrentTrick()
@@ -186,6 +194,13 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         cobraFlipAnimation.Play("CobraFlip_off");
+    }    
+    
+    private IEnumerator DoubleScoreOff()
+    {
+        yield return new WaitForSeconds(2f);
+        doubleScoreAnimation.Play("doubleScoreOff");
+
     }
 
     public void AddScore(float addedScore)
@@ -208,8 +223,11 @@ public class LevelManager : MonoBehaviour
         endTimer = 60;
         Time.timeScale = 1;
         player.transform.position = playerSpawnPos.position;
+        player.transform.rotation = Quaternion.identity;
+        musicLoopAudioSource.Play();
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         screenOverGO.SetActive(false);
+        
         scoreText.text = "Your score is: \n" + ((int) this.score);
     }
 
