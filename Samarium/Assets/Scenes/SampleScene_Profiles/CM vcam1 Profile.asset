@@ -100,10 +100,10 @@ MonoBehaviour:
     value: 1
   shutterAngle:
     overrideState: 1
-    value: 255.9
+    value: 269
   sampleCount:
     overrideState: 1
-    value: 18
+    value: 17
 --- !u!114 &8060985509919462516
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -122,7 +122,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 10.86
+    value: 16.11
   threshold:
     overrideState: 0
     value: 1
@@ -140,7 +140,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0.3920879, g: 0.8396226, b: 0.7531577, a: 1}
+    value: {r: 0.41006586, g: 0.8962264, b: 0.80240595, a: 1}
   fastMode:
     overrideState: 0
     value: 0

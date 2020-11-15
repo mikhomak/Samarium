@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.Numerics;
 using DefaultNamespace.Tricks;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 public class LevelManager : MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public float jerkSpeed = 0.05f;
     [SerializeField] public float endTimer = 60.0f;
     [SerializeField] public float timer;
-    [SerializeField] public float scoreToWin = 10000.0f;
+    [SerializeField] public float scoreToWin = 5000.0f;
     [SerializeField] private GameObject screenOverGO;
     [SerializeField] private Text screenOverText;
     [SerializeField] private Transform playerSpawnPos;
@@ -197,6 +199,7 @@ public class LevelManager : MonoBehaviour
         endTimer = 60;
         Time.timeScale = 1;
         player.transform.position = playerSpawnPos.position;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         screenOverGO.SetActive(false);
     }
 }

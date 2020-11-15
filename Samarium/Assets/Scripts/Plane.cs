@@ -108,7 +108,7 @@ public class Plane : MonoBehaviour
     private IEnumerator ProgressivelyIncreaseVolume()
     {
         stopAudioManagement = false;
-        while (Math.Abs(driftSource.volume - 0.85f) > 0.1f) {
+        while (Math.Abs(driftSource.volume - 0.7f) > 0.1f) {
             if (stopAudioManagement) {
                 yield break;
             }
