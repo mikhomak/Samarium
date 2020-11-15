@@ -117,6 +117,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void ResetCurrentScore()
+    {
+        currentTrickScore = 0;
+    }
+    
     public void ReleaseCurrentTrick()
     {
         currentTrickScoreText.text = "";

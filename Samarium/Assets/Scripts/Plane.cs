@@ -79,6 +79,11 @@ public class Plane : MonoBehaviour
         PlaneAnimatorFacade.SetYawn(yawnInput);
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        levelManager.ResetCurrentScore();
+    }
+
     public void EnableDriftTraces()
     {
         trailLeftTR.emitting = true;
