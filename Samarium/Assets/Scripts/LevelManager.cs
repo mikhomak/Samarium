@@ -39,9 +39,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip cobraAudioClip;
 
     [SerializeField] private AudioSource specialEffectsAudioSource;
+
     [SerializeField] private AudioSource crowdAudioSource;
     // sue me see if i care
-    
+
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
     private Vector3 initialDriftHighSpeedTextPos;
@@ -97,7 +98,7 @@ public class LevelManager : MonoBehaviour
             screenOverText.text = "YOU LOST";
         }
     }
-    
+
     public void UpdateDriftClose(bool close)
     {
         if (close && currentTrickScore != 0) {
@@ -147,7 +148,7 @@ public class LevelManager : MonoBehaviour
     {
         currentTrickScore *= 2;
     }
-    
+
     public void ReleaseCurrentTrick()
     {
         currentTrickScoreText.text = "";
@@ -159,7 +160,7 @@ public class LevelManager : MonoBehaviour
     {
         currentTrickScore *= specialTrick.GetSpecialTrickMultiplier();
         if (currentTrickScore != 0) {
-            currentTrickScoreText.text = ((int)currentTrickScore).ToString();
+            currentTrickScoreText.text = ((int) currentTrickScore).ToString();
         }
 
         if (specialTrick is BarrelRoll) {
@@ -190,15 +191,16 @@ public class LevelManager : MonoBehaviour
     public void AddScore(float addedScore)
     {
         this.score += addedScore;
-        scoreText.text = "Your score is: \n" + ((int)this.score);
-        crowdAudioSource.volume = Remap(score, 0f, 5000f,0,0.1f);
+        scoreText.text = "Your score is: \n" + ((int) this.score);
+        var volume = Remap(score, 0f, 5000f, 0, 0.1f);
+        crowdAudioSource.volume = volume > 0.2f ? 0.2f : volume;
     }
 
     private float Remap(float value, float inA, float inB, float outA, float outB)
     {
         return outA + (value - inA) * (outB - outA) / (inB - inA);
     }
-    
+
     public void RestartGame()
     {
         gameOver = false;
@@ -208,7 +210,7 @@ public class LevelManager : MonoBehaviour
         player.transform.position = playerSpawnPos.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         screenOverGO.SetActive(false);
-        scoreText.text = "Your score is: \n" + ((int)this.score);
+        scoreText.text = "Your score is: \n" + ((int) this.score);
     }
 
     public void Menu()

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
@@ -9,16 +6,20 @@ public class MovingObject : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float distanceToChange;
 
-    private Vector3 posChange; 
-    
+    private Vector3 posChange;
+
     private void Start()
     {
-        
+        posChange = transform.position;
     }
 
     private void FixedUpdate()
     {
-        //if()
+        if (Vector3.Distance(posChange, transform.position) > distanceToChange) {
+            direction *= -1;
+            posChange = transform.position;
+        }
+
         transform.position += direction * speed;
     }
 }
