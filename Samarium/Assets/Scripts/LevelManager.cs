@@ -121,6 +121,11 @@ public class LevelManager : MonoBehaviour
     {
         currentTrickScore = 0;
     }
+
+    public void DoubleCurrentScore()
+    {
+        currentTrickScore *= 2;
+    }
     
     public void ReleaseCurrentTrick()
     {
