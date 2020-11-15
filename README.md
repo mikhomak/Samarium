@@ -41,6 +41,7 @@ If you fly into something you loose your current score for the current move.
 
 This code is very bad, don't try to understand what is happening there. It was tough to think of an idea, create it, programm it, create assets, sfx, vfx and so on only in 2 days. That's the cost of game jams tho. So ya know don't expect best practices here   
 
+## Screenshots:   
 ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/1.png)
 ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/2.png)
 ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/3.png)
