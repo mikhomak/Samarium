@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     public float score = 0;
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text timerText;
     [SerializeField] private GameObject driftTextGameObject;
     [SerializeField] private GameObject driftCloseGameObject;
     [SerializeField] private GameObject driftHighSpeedGameObject;
@@ -22,6 +23,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text currentTrickScoreText;
     [SerializeField] private float currentTrickScore;
     [SerializeField] public float jerkSpeed = 0.05f;
+    [SerializeField] public float endTimer =60.0f;
+    [SerializeField] public float timer;
 
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
@@ -49,6 +52,16 @@ public class LevelManager : MonoBehaviour
     {
         currentTrickScore += currentScore;
         currentTrickScoreText.text = currentTrickScore + "";
+    }
+
+
+    private void FixedUpdate()
+    {
+        endTimer -= Time.deltaTime;
+        timerText.text = endTimer + "";
+        if (endTimer < 0) {
+            Debug.Log("GameOver");
+        }
     }
 
     public void UpdateDriftClose(bool close)
@@ -131,7 +144,7 @@ public class LevelManager : MonoBehaviour
     public void AddScore(float addedScore)
     {
         this.score += addedScore;
-        scoreText.text = "Your score is: " + this.score;
+        scoreText.text = "Your score is: \n" + this.score;
     }
 
 
