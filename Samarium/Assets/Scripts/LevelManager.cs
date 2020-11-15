@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public float jerkSpeed = 0.05f;
     [SerializeField] public float endTimer = 60.0f;
     [SerializeField] public float timer;
+    [SerializeField] public float scoreToWin = 10000.0f;
 
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
@@ -60,10 +61,22 @@ public class LevelManager : MonoBehaviour
         endTimer -= Time.deltaTime;
         timerText.text = ((int) endTimer).ToString();
         if (endTimer < 0) {
-            Debug.Log("GameOver");
+            TimeOver();
         }
     }
 
+    private void TimeOver()
+    {
+        AddScore(currentTrickScore);
+        Time.timeScale = 0;
+        if (score > scoreToWin) {
+            Debug.Log("Cool");
+        }
+        else {
+            Debug.Log("uncool");
+        }
+    }
+    
     public void UpdateDriftClose(bool close)
     {
         if (close && currentTrickScore != 0) {
