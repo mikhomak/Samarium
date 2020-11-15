@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip barrelAudioClip;
     [SerializeField] private AudioClip cobraAudioClip;
 
-    [SerializeField] private AudioSource specialEffectsAudioSource;
+    [SerializeField] public AudioSource specialEffectsAudioSource;
 
     [SerializeField] private AudioSource crowdAudioSource;
     // sue me see if i care
