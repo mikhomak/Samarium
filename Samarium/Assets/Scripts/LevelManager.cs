@@ -3,6 +3,7 @@ using System.Collections;
 using System.Numerics;
 using DefaultNamespace.Tricks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -38,6 +39,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip cobraAudioClip;
 
     [SerializeField] private AudioSource specialEffectsAudioSource;
+    [SerializeField] private AudioSource crowdAudioSource;
     // sue me see if i care
     
     private Vector3 initialDriftTextPos;
@@ -131,7 +133,7 @@ public class LevelManager : MonoBehaviour
                 initialBarrelRollTextPos.y + Random.Range(-4, 4));
             cobraFlipGameObject.transform.position = new Vector3(initialCobraFlipTextPos.x + Random.Range(-4, 4),
                 initialCobraFlipTextPos.y + Random.Range(-4, 4));
-            yield return new WaitForSeconds(jerkSpeed);
+            yield return new WaitForSeconds(currentTrickScore > 1000 ? jerkSpeed : 0.01f);
         }
     }
 
@@ -189,8 +191,13 @@ public class LevelManager : MonoBehaviour
     {
         this.score += addedScore;
         scoreText.text = "Your score is: \n" + ((int)this.score);
+        crowdAudioSource.volume = Remap(score, 0f, 5000f,0,0.1f);
     }
 
+    private float Remap(float value, float inA, float inB, float outA, float outB)
+    {
+        return outA + (value - inA) * (outB - outA) / (inB - inA);
+    }
     
     public void RestartGame()
     {
@@ -201,5 +208,11 @@ public class LevelManager : MonoBehaviour
         player.transform.position = playerSpawnPos.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         screenOverGO.SetActive(false);
+        scoreText.text = "Your score is: \n" + ((int)this.score);
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("menu", LoadSceneMode.Single);
     }
 }
