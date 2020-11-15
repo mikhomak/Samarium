@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+
     public float score = 0;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text timerText;
@@ -26,12 +27,25 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public float endTimer = 60.0f;
     [SerializeField] public float timer;
     [SerializeField] public float scoreToWin = 10000.0f;
+    [SerializeField] private GameObject screenOverGO;
+    [SerializeField] private Text screenOverText;
+    [SerializeField] private Transform playerSpawnPos;
+    [SerializeField] private GameObject player;
 
+    [SerializeField] private AudioClip barrelAudioClip;
+    [SerializeField] private AudioClip cobraAudioClip;
+
+    [SerializeField] private AudioSource specialEffectsAudioSource;
+    // sue me see if i care
+    
     private Vector3 initialDriftTextPos;
     private Vector3 initialDriftCloseTextPos;
     private Vector3 initialDriftHighSpeedTextPos;
     private Vector3 initialBarrelRollTextPos;
     private Vector3 initialCobraFlipTextPos;
+
+
+    private bool gameOver;
 
     private void Awake()
     {
@@ -61,6 +75,8 @@ public class LevelManager : MonoBehaviour
         endTimer -= Time.deltaTime;
         timerText.text = ((int) endTimer).ToString();
         if (endTimer < 0) {
+            player.GetComponent<Plane>().DisableDriftTraces();
+            gameOver = true;
             TimeOver();
         }
     }
@@ -69,11 +85,12 @@ public class LevelManager : MonoBehaviour
     {
         AddScore(currentTrickScore);
         Time.timeScale = 0;
+        screenOverGO.SetActive(true);
         if (score > scoreToWin) {
-            Debug.Log("Cool");
+            screenOverText.text = "YOU WON";
         }
         else {
-            Debug.Log("uncool");
+            screenOverText.text = "YOU LOST";
         }
     }
     
@@ -112,7 +129,6 @@ public class LevelManager : MonoBehaviour
                 initialBarrelRollTextPos.y + Random.Range(-4, 4));
             cobraFlipGameObject.transform.position = new Vector3(initialCobraFlipTextPos.x + Random.Range(-4, 4),
                 initialCobraFlipTextPos.y + Random.Range(-4, 4));
-            Debug.Log("es");
             yield return new WaitForSeconds(jerkSpeed);
         }
     }
@@ -143,10 +159,12 @@ public class LevelManager : MonoBehaviour
         }
 
         if (specialTrick is BarrelRoll) {
+            specialEffectsAudioSource.PlayOneShot(barrelAudioClip, 0.9f);
             barrelRollAnimation.Play("BarrelRollOn");
             StartCoroutine(BarrelRollOff());
         }
         else {
+            specialEffectsAudioSource.PlayOneShot(cobraAudioClip, 0.9f);
             cobraFlipAnimation.Play("CobraFlip_ON");
             StartCoroutine(CobraFlipOff());
         }
@@ -171,14 +189,14 @@ public class LevelManager : MonoBehaviour
         scoreText.text = "Your score is: \n" + ((int)this.score);
     }
 
-
-    public void OnBarrelOn()
+    
+    public void RestartGame()
     {
-        barrelRollGameObject.transform.localScale = Vector3.one;
-    }
-
-    public void OnBarrelOff()
-    {
-        barrelRollGameObject.transform.localScale = Vector3.zero;
+        gameOver = false;
+        score = 0;
+        endTimer = 60;
+        Time.timeScale = 1;
+        player.transform.position = playerSpawnPos.position;
+        screenOverGO.SetActive(false);
     }
 }
