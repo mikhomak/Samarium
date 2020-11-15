@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 initialBarrelRollTextPos;
     private Vector3 initialCobraFlipTextPos;
 
-    private void Start()
+    private void Awake()
     {
         initialDriftTextPos = driftTextGameObject.transform.position;
         initialDriftCloseTextPos = driftCloseGameObject.transform.position;
@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
                 initialBarrelRollTextPos.y + Random.Range(-4, 4));
             cobraFlipGameObject.transform.position = new Vector3(initialCobraFlipTextPos.x + Random.Range(-4, 4),
                 initialCobraFlipTextPos.y + Random.Range(-4, 4));
-
+            Debug.Log("es");
             yield return new WaitForSeconds(jerkSpeed);
         }
     }
