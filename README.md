@@ -45,8 +45,7 @@ This code is very bad, don't try to understand what is happening there. It was t
 |![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk1.gif)   |![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk2.gif)   |
 |---|---|
 |![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk3.gif)   | ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk4.gif)  |
-|
-![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk5.gif)   | ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk6.gif)  |
+|![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk5.gif)|![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/jethawk6.gif)|
 
 
 ![](https://raw.githubusercontent.com/mikhomak/Images/master/Samarium/1.png)
